@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth profile-coding">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinayak Khanna -- Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,800;0,900;1,300;1,400;1,500;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgDark: '#0C0C0C',
+                        textLight: '#D7E2EA',
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-dark: #0C0C0C;
+            --text-light: #D7E2EA;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .hero-heading {
+            background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-btn {
+            background: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
+            box-shadow: 0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1;
+            outline: 2px solid white;
+            outline-offset: -3px;
+        }
+
+        /* FadeIn Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+            will-change: opacity, transform;
+        }
+        
+        .fade-in-x-left, .fade-in-x-right {
+            opacity: 0;
+            transition: opacity 0.9s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+            will-change: opacity, transform;
+        }
+        
+        .fade-in-x-left { transform: translateX(-80px); }
+        .fade-in-x-right { transform: translateX(80px); }
+
+        .is-visible {
+            opacity: 1 !important;
+            transform: translate(0, 0) !important;
+        }
+
+        /* Magnet wrapper */
+        .magnet-container { will-change: transform; }
+        .magnet-inner {
+            transition: transform 0.6s ease-in-out;
+            will-change: transform;
+        }
+        .magnet-inner.active { transition: transform 0.3s ease-out; }
+
+        /* Custom Selection */
+        ::selection {
+            background: #D7E2EA;
+            color: #0C0C0C;
+        }
+
+        /* --- PROFILE TOGGLE LOGIC --- */
+        html.profile-coding .only-video { display: none !important; }
+        html.profile-video .only-coding { display: none !important; }
+
+        .profile-toggle-active {
+            background: #D7E2EA;
+            color: #0C0C0C;
+        }
+        .profile-toggle-inactive {
+            color: rgba(215, 226, 234, 0.6);
+        }
+        .profile-toggle-inactive:hover {
+            color: #D7E2EA;
+            background: rgba(215, 226, 234, 0.1);
+        }
+
+        /* Smooth Blur & Fade Transition for Profile Switching */
+        .profile-transition {
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity, filter, transform;
+        }
+        body.is-switching .profile-transition {
+            opacity: 0 !important;
+            filter: blur(8px);
+            transform: scale(0.98) translateY(10px);
+        }
+
+        /* Modal Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(215, 226, 234, 0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(215, 226, 234, 0.4); }
+    </style>
+</head>
+<body class="w-full min-h-screen selection:bg-[#D7E2EA] selection:text-[#0C0C0C]">
+
+    <main class="w-full overflow-x-clip">
+        
+        <section class="h-screen flex flex-col relative overflow-clip w-full">
+            <!-- Navbar with Toggle -->
+            <div class="fade-in w-full relative z-50" style="transform: translateY(-20px); transition-delay: 0s;">
+                <nav class="flex flex-col sm:flex-row justify-between items-center px-6 md:px-10 pt-6 md:pt-8 gap-4 sm:gap-0">
+                    
+                    <div class="flex items-center gap-4 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-base">
+                        <a href="#about" class="hover:opacity-70 transition-opacity duration-200 hidden sm:block">About</a>
+                        <a href="#expertise" class="hover:opacity-70 transition-opacity duration-200 hidden md:block">Expertise</a>
+                    </div>
+                    
+                    <!-- Centered Pill Toggle -->
+                    <div class="flex bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-sm">
+                        <button id="toggle-coding" class="profile-toggle-active rounded-full px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300">
+                            Data & Coding
+                        </button>
+                        <button id="toggle-video" class="profile-toggle-inactive rounded-full px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300">
+                            Video Editing
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-4 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-base">
+                        <a href="#projects" class="hover:opacity-70 transition-opacity duration-200">Projects</a>
+                        <a href="#contact" class="hover:opacity-70 transition-opacity duration-200 hidden sm:block">Contact</a>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Profile Transition Wrapper for Hero Content -->
+            <div class="profile-transition flex-1 flex flex-col w-full relative z-0">
+                
+                <!-- Main Heading -->
+                <div class="flex-1 flex flex-col justify-center items-center w-full mt-6 sm:mt-4 md:-mt-5">
+                    <div class="overflow-hidden w-full text-center">
+                        <div class="fade-in" style="transform: translateY(40px); transition-delay: 150ms; transition-duration: 1s;">
+                            <h1 class="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[12vw] sm:text-[13vw] md:text-[14vw] lg:text-[15.5vw]">
+                                I'm Vinayak
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar -->
+                <div class="flex flex-col sm:flex-row justify-between items-center sm:items-end gap-6 sm:gap-0 pb-7 sm:pb-8 md:pb-10 px-6 md:px-10 relative z-20">
+                    <div class="fade-in text-center sm:text-left max-w-[280px] sm:max-w-[220px] md:max-w-[320px]" style="transform: translateY(20px); transition-delay: 350ms;">
+                        <p class="only-coding text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-[clamp(0.85rem,1.4vw,1.5rem)]">
+                            A Data Analyst driven by transforming raw data into actionable insights
+                        </p>
+                        <p class="only-video text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-[clamp(0.85rem,1.4vw,1.5rem)]">
+                            Professional Video Editor & Graphic Designer bringing digital stories to life
+                        </p>
+                    </div>
+                    
+                    <div class="fade-in flex items-center justify-center gap-3 sm:gap-4" style="transform: translateY(20px); transition-delay: 500ms;">
+                        <!-- Contact Buttons -->
+                        <button class="contact-btn rounded-full px-6 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 whitespace-nowrap">
+                            Contact Me
+                        </button>
+                        <!-- Download Resume Button -->
+                        <a href="#" target="_blank" class="resume-btn flex items-center justify-center gap-2 rounded-full px-5 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 text-xs sm:text-sm md:text-base text-[#D7E2EA] font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 border border-[#D7E2EA]/30 hover:bg-[#D7E2EA]/10 backdrop-blur-sm whitespace-nowrap">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span class="hidden sm:inline">Download</span> Resume
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Center Portrait (Magnet) fixed to use flexbox for perfect alignment -->
+                <div class="absolute inset-0 z-10 flex justify-center items-center sm:items-end pointer-events-none">
+                    <div class="fade-in pointer-events-auto w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px]" style="transition-delay: 600ms;">
+                        <div class="magnet-container relative inline-block w-full">
+                            <div class="magnet-inner w-full">
+                                <img 
+                                    src="https://raw.githubusercontent.com/Vinayakkhanna/Portfolio/main/3D.png" 
+                                    alt="Vinayak Khanna Portrait" 
+                                    class="w-full h-auto object-contain drop-shadow-2xl"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="marquee-section" class="profile-transition bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-16 overflow-hidden flex flex-col gap-4 sm:gap-6 relative z-10 py-10">
+            <div id="marquee-1" class="flex gap-4 sm:gap-6 w-max" style="will-change: transform;"></div>
+            <div id="marquee-2" class="flex gap-4 sm:gap-6 w-max" style="will-change: transform;"></div>
+        </section>
+
+        <section id="about" class="min-h-screen relative flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 overflow-hidden">
+            
+            <div class="fade-in-x-left absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-0" style="transition-delay: 100ms;">
+                <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="Moon 3D" class="w-[120px] sm:w-[160px] md:w-[210px] object-contain opacity-80" />
+            </div>
+            <div class="fade-in-x-right absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] z-0" style="transition-delay: 300ms;">
+                <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="3D Group" class="w-[130px] sm:w-[170px] md:w-[220px] object-contain opacity-80" />
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center text-center gap-10 sm:gap-14 md:gap-16 w-full">
+                <div class="fade-in" style="transform: translateY(40px);">
+                    <h2 class="hero-heading font-black uppercase leading-none tracking-tight text-[clamp(3rem,12vw,160px)]">
+                        About me
+                    </h2>
+                </div>
+                
+                <div class="profile-transition max-w-[700px] flex flex-col items-center gap-16 sm:gap-20 md:gap-24 w-full">
+                    <p id="animated-text-container" class="text-[#D7E2EA] font-medium leading-relaxed text-[clamp(1rem,2vw,1.35rem)]">
+                        <!-- Spans populated via JS dynamically based on active profile -->
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full">
+                        <button class="contact-btn rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
+                            Contact Me
+                        </button>
+                        <a href="#" target="_blank" class="resume-btn flex items-center justify-center gap-2 rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base text-[#D7E2EA] font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 border border-[#D7E2EA]/30 hover:bg-[#D7E2EA]/10 w-full sm:w-auto">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise" class="bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-10 relative z-0">
+            <div class="fade-in" style="transform: translateY(30px);">
+                <h2 class="text-[#0C0C0C] font-black uppercase text-center text-[clamp(3rem,12vw,160px)] leading-none mb-16 sm:mb-20 md:mb-28">
+                    Expertise
+                </h2>
+            </div>
+
+            <!-- Profile Transition Wrapper for Expertise -->
+            <div class="profile-transition w-full">
+                
+                <!-- CODING / DATA ANALYST EXPERTISE -->
+                <div class="only-coding max-w-5xl mx-auto flex flex-col">
+                    <div class="fade-in border-b border-[rgba(12,12,12,0.15)] last:border-b-0" style="transition-delay: 0ms;">
+                        <div class="flex flex-col sm:flex-row sm:items-center py-8 sm:py-10 md:py-12 gap-4 sm:gap-8 md:gap-16">
+                            <span class="text-[#0C0C0C] font-black text-[clamp(3rem,10vw,140px)] leading-none min-w-[100px] sm:min-w-[150px] md:min-w-[180px]">01</span>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-[#0C0C0C] font-medium uppercase text-[clamp(1rem,2.2vw,2.1rem)]">Data Analytics</h3>
+                                <p class="text-[#0C0C0C] font-light leading-relaxed max-w-2xl text-[clamp(0.85rem,1.6vw,1.25rem)] opacity-60">Proficient in Data Cleaning, Statistical Analysis, Data Visualization, and Exploratory Data Analysis. Skilled in translating complex datasets into clear, actionable business strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fade-in border-b border-[rgba(12,12,12,0.15)] last:border-b-0" style="transition-delay: 100ms;">
+                        <div class="flex flex-col sm:flex-row sm:items-center py-8 sm:py-10 md:py-12 gap-4 sm:gap-8 md:gap-16">
+                            <span class="text-[#0C0C0C] font-black text-[clamp(3rem,10vw,140px)] leading-none min-w-[100px] sm:min-w-[150px] md:min-w-[180px]">02</span>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-[#0C0C0C] font-medium uppercase text-[clamp(1rem,2.2vw,2.1rem)]">Programming & Tools</h3>
+                                <p class="text-[#0C0C0C] font-light leading-relaxed max-w-2xl text-[clamp(0.85rem,1.6vw,1.25rem)] opacity-60">Strong technical foundation in Python, SQL (MySQL), C++, and C. Highly experienced with analytical libraries and tools like NumPy, Pandas, Matplotlib, and DBMS.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO EDITING EXPERTISE -->
+                <div class="only-video max-w-5xl mx-auto flex flex-col">
+                    <div class="fade-in border-b border-[rgba(12,12,12,0.15)] last:border-b-0" style="transition-delay: 0ms;">
+                        <div class="flex flex-col sm:flex-row sm:items-center py-8 sm:py-10 md:py-12 gap-4 sm:gap-8 md:gap-16">
+                            <span class="text-[#0C0C0C] font-black text-[clamp(3rem,10vw,140px)] leading-none min-w-[100px] sm:min-w-[150px] md:min-w-[180px]">01</span>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-[#0C0C0C] font-medium uppercase text-[clamp(1rem,2.2vw,2.1rem)]">Post-Production & Editing</h3>
+                                <p class="text-[#0C0C0C] font-light leading-relaxed max-w-2xl text-[clamp(0.85rem,1.6vw,1.25rem)] opacity-60">Advanced proficiency in Adobe Premiere Pro, DaVinci Resolve, and CapCut. Expertise in Color Grading to set mood, Sound Design for immersive experiences, and Multicam Editing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fade-in border-b border-[rgba(12,12,12,0.15)] last:border-b-0" style="transition-delay: 100ms;">
+                        <div class="flex flex-col sm:flex-row sm:items-center py-8 sm:py-10 md:py-12 gap-4 sm:gap-8 md:gap-16">
+                            <span class="text-[#0C0C0C] font-black text-[clamp(3rem,10vw,140px)] leading-none min-w-[100px] sm:min-w-[150px] md:min-w-[180px]">02</span>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-[#0C0C0C] font-medium uppercase text-[clamp(1rem,2.2vw,2.1rem)]">Top Tier Creators</h3>
+                                <p class="text-[#0C0C0C] font-light leading-relaxed max-w-2xl text-[clamp(0.85rem,1.6vw,1.25rem)] opacity-60">Professional Video Editor for leading creators including Ashwin Singh Takiar, Elvish Yadav, Mavi, Uneducated Engineer, RealHits, Corrupt Tuber, Lakshay & Archit, F10 Dalal, Kabir Sheikh, Tarun Saharan, Imran Majid, Rehan Records, Meta Ninza, and Karan Aujla (India Tour).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MULTIFACETED PASSIONS (Bento Box - Always Visible) -->
+            <div class="max-w-7xl mx-auto mt-24 sm:mt-32 mb-10">
+                <div class="fade-in mb-8 md:mb-12 text-center sm:text-left">
+                    <h2 class="text-[#0C0C0C] font-black uppercase text-[clamp(2rem,6vw,80px)] leading-none tracking-tight">Beyond The Screen</h2>
+                    <p class="text-[#0C0C0C]/50 font-medium uppercase tracking-widest mt-2 text-xs sm:text-sm">Esports, Athletics & Motorsports</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                    <!-- Esports Coach -->
+                    <div class="fade-in bg-[#f4f4f5] rounded-[30px] p-6 sm:p-8 flex flex-col gap-4 shadow-sm border border-black/5 hover:bg-[#e4e4e7] transition-colors duration-300">
+                        <h3 class="text-xl sm:text-2xl font-bold uppercase text-[#0C0C0C]">🎮 Esports Coach</h3>
+                        <p class="text-[#0C0C0C]/70 font-light text-sm sm:text-base leading-relaxed">
+                            Coach for IGC BGMI T1 (RedFlame Esports) since 2018. Led the team to numerous national-level victories and high-stakes tournament placements.
+                        </p>
+                        <ul class="text-xs sm:text-sm font-medium text-[#0C0C0C]/80 mt-auto flex flex-col gap-2 border-t border-black/10 pt-4">
+                            <li class="flex items-center gap-2"><span>🏆</span> Winner: Skyesports 2023 (₹10 Lakh)</li>
+                            <li class="flex items-center gap-2"><span>🏆</span> Winner: Upthrust & Raven Esports</li>
+                            <li class="flex items-center gap-2"><span>🔥</span> Top 5: BGIS & BMPS Quarter 2024</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Cricketer -->
+                    <div class="fade-in bg-[#f4f4f5] rounded-[30px] p-6 sm:p-8 flex flex-col gap-4 shadow-sm border border-black/5 hover:bg-[#e4e4e7] transition-colors duration-300 md:mt-12">
+                        <h3 class="text-xl sm:text-2xl font-bold uppercase text-[#0C0C0C]">🏏 District Cricketer</h3>
+                        <p class="text-[#0C0C0C]/70 font-light text-sm sm:text-base leading-relaxed">
+                            Tier 2 district-level cricket player representing Bareilly, UP. Recognized with multiple "Player of the Match" and "Best Bowler" awards.
+                        </p>
+                        <ul class="text-xs sm:text-sm font-medium text-[#0C0C0C]/80 mt-auto flex flex-col gap-2 border-t border-black/10 pt-4">
+                            <li class="flex items-center gap-2"><span>💥</span> Best Batting: 164 runs vs Delhi Phantoms</li>
+                            <li class="flex items-center gap-2"><span>🎯</span> Best Bowling: 6 wickets / 17 runs</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Motorsports -->
+                    <div class="fade-in bg-[#f4f4f5] rounded-[30px] p-6 sm:p-8 flex flex-col gap-4 shadow-sm border border-black/5 hover:bg-[#e4e4e7] transition-colors duration-300">
+                        <h3 class="text-xl sm:text-2xl font-bold uppercase text-[#0C0C0C]">🏎️ Car Drifter</h3>
+                        <p class="text-[#0C0C0C]/70 font-light text-sm sm:text-base leading-relaxed">
+                            Professional off-roader and car drifter. Pushing the limits of skill and control at venues like the Buddh International Circuit (BIC).
+                        </p>
+                        <ul class="text-xs sm:text-sm font-medium text-[#0C0C0C]/80 mt-auto flex flex-col gap-2 border-t border-black/10 pt-4">
+                            <li class="flex items-center gap-2"><span>🏁</span> Expert in high-speed precision drifting</li>
+                            <li class="flex items-center gap-2"><span>⛰️</span> Tackling extreme off-road terrains</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative pt-20 sm:pt-24 md:pt-32 pb-40 px-5 sm:px-8 md:px-10">
+            <div class="fade-in mb-10 md:mb-16" style="transform: translateY(30px);">
+                <h2 class="hero-heading font-black uppercase text-center text-[clamp(3rem,12vw,160px)] leading-none">
+                    Projects
+                </h2>
+            </div>
+
+            <div class="profile-transition w-full">
+                <!-- CODING PROJECTS -->
+                <div class="only-coding w-full max-w-7xl mx-auto flex flex-col gap-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-[#D7E2EA]">
+                        <a href="https://github.com/Vinayakkhanna/TubeIQ" target="_blank" class="block p-6 border border-[#D7E2EA]/30 rounded-[30px] hover:bg-[#D7E2EA]/10 transition-colors">
+                            <span class="text-[#D7E2EA]/60 uppercase tracking-widest text-xs">Python / Analytics</span>
+                            <h3 class="text-2xl font-bold mt-2">TubeIQ</h3>
+                            <p class="font-light opacity-70 mt-2 text-sm">YouTube analytics platform for tracking engagement and growth trends.</p>
+                        </a>
+                        <a href="https://github.com/Vinayakkhanna/FuelTracker" target="_blank" class="block p-6 border border-[#D7E2EA]/30 rounded-[30px] hover:bg-[#D7E2EA]/10 transition-colors">
+                            <span class="text-[#D7E2EA]/60 uppercase tracking-widest text-xs">System App</span>
+                            <h3 class="text-2xl font-bold mt-2">FuelTracker</h3>
+                            <p class="font-light opacity-70 mt-2 text-sm">Fuel tracking system to monitor mileage and fuel expenses.</p>
+                        </a>
+                        <a href="https://github.com/Vinayakkhanna/instagram_iq" target="_blank" class="block p-6 border border-[#D7E2EA]/30 rounded-[30px] hover:bg-[#D7E2EA]/10 transition-colors">
+                            <span class="text-[#D7E2EA]/60 uppercase tracking-widest text-xs">Data Visualization</span>
+                            <h3 class="text-2xl font-bold mt-2">InstaIQ</h3>
+                            <p class="font-light opacity-70 mt-2 text-sm">Instagram analytics tool to track engagement and follower growth.</p>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 text-[#D7E2EA]">
+                        <h3 class="text-xl font-bold mb-6 uppercase tracking-widest">More Repositories</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <a href="https://github.com/Vinayakkhanna/YouTube-Channel-Stats-Visualizer" target="_blank" class="block p-4 border border-[#D7E2EA]/20 rounded-2xl hover:bg-[#D7E2EA]/10 transition-colors text-sm">YouTube Channel Stats Visualizer</a>
+                            <a href="https://github.com/Vinayakkhanna/DeepFake" target="_blank" class="block p-4 border border-[#D7E2EA]/20 rounded-2xl hover:bg-[#D7E2EA]/10 transition-colors text-sm">DeepFake</a>
+                            <a href="https://github.com/Vinayakkhanna/Vehicle-Service-Management-System" target="_blank" class="block p-4 border border-[#D7E2EA]/20 rounded-2xl hover:bg-[#D7E2EA]/10 transition-colors text-sm">Vehicle Service Management System</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO PROJECTS -->
+                <div class="only-video w-full max-w-7xl mx-auto flex flex-col items-center justify-center py-20 text-center relative">
+                    <!-- Background Glow -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-80 h-48 sm:h-80 bg-[#7621B0]/20 blur-[100px] rounded-full pointer-events-none"></div>
+                    
+                    <h3 class="text-[#D7E2EA] text-3xl md:text-5xl font-bold uppercase tracking-tight z-10">Showreel & Edits</h3>
+                    <p class="text-[#D7E2EA]/60 mt-4 max-w-xl text-sm md:text-base z-10 leading-relaxed">A curated collection of dynamic edits, sound design masterpieces, and high-retention content created for India's top creators.</p>
+                    
+                    <!-- Enhanced Premium Button -->
+                    <button id="open-playlist-btn" class="group relative mt-12 z-10 flex items-center gap-3 contact-btn rounded-full px-8 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(182,0,168,0.3)]">
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+                            <svg class="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span>View Master Playlist</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playlist Modal (Hidden by default) -->
+        <div id="playlist-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm modal-backdrop"></div>
+            <div class="relative bg-[#0C0C0C] border border-[#D7E2EA]/20 rounded-[30px] w-full max-w-2xl mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="playlist-modal-content">
+                <!-- Header -->
+                <div class="flex items-center justify-between p-6 sm:p-8 border-b border-[#D7E2EA]/10">
+                    <h3 class="text-[#D7E2EA] text-xl sm:text-2xl font-bold uppercase tracking-widest">Master Playlist</h3>
+                    <button id="close-playlist-btn" class="text-[#D7E2EA]/60 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <!-- Content List -->
+                <div class="p-4 sm:p-6 overflow-y-auto max-h-[60vh] custom-scrollbar flex flex-col gap-3">
+                    
+                    <a href="https://youtu.be/wwT18sl27h4" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Ashwin Singh Takiar</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                    
+                    <a href="https://youtu.be/FeUhX-tOhzM" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Elvish Yadav Vlogs</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://youtu.be/-RZMtV6hhgY" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Elvish Yadav</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://youtu.be/e2kSh90hGmk" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Mavi</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://youtube.com/shorts/1TlNMvjP3No" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Rehan Records</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://youtu.be/WnZGoiYVwxE" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Corrupt Tuber</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://youtu.be/q8x4ZoXBkwQ" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#FF0000]/20 text-[#FF0000] flex items-center justify-center border border-[#FF0000]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Lakshay & Archit</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://www.instagram.com/reel/DIeI2dwTnxD" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#E1306C]/20 text-[#E1306C] flex items-center justify-center border border-[#E1306C]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">F10 Dalal</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://www.instagram.com/reel/DLxdr7yTj3p" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#E1306C]/20 text-[#E1306C] flex items-center justify-center border border-[#E1306C]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Kabir Sheikh</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="https://www.instagram.com/reel/DXtMPs3j3fS" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#E1306C]/20 text-[#E1306C] flex items-center justify-center border border-[#E1306C]/30"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+                            <span class="text-[#D7E2EA] font-medium text-lg tracking-wide group-hover:text-white transition-colors">Meta Ninza</span>
+                        </div>
+                        <svg class="w-5 h-5 text-[#D7E2EA]/40 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // DOM Elements
+            const btnCoding = document.getElementById('toggle-coding');
+            const btnVideo = document.getElementById('toggle-video');
+            const r1Container = document.getElementById('marquee-1');
+            const r2Container = document.getElementById('marquee-2');
+            const textContainer = document.getElementById('animated-text-container');
+            
+            // Text Animation Data
+            let charSpans = [];
+            let totalChars = 0;
+            const textCoding = "Aspiring Data Analyst and BCA (Hons.) Research student with a strong foundation in Python and statistical analysis. Beyond the screen, I am a multifaceted professional excelling in Esports, Cricket, and Motorsports. Passion, dedication, and the relentless pursuit of excellence define my journey across these diverse fields.";
+            const textVideo = "Professional Video Editor and Graphic Designer bringing stories to life for India's top creators and gaming organizations. Beyond the screen, I am a multifaceted professional excelling in Esports, Cricket, and Motorsports. Passion, dedication, and the relentless pursuit of excellence define my journey.";
+
+            // --- Dynamic Contact & Download URLs ---
+            const codingEmail = 'vinayakkhanna642@gmail.com';
+            const videoEmail = 'editor.vinayak07@gmail.com';
+            const codingResume = 'https://github.com/Vinayakkhanna/Portfolio/raw/main/Vinayak%20Khanna%20Coding%20Resume.pdf';
+            const videoResume = 'https://github.com/Vinayakkhanna/Portfolio/raw/main/Vinayak%20Khanna%20Video%20Editor.pdf';
+
+            // Data Arrays for Marquee
+            const videoData = [
+                { title: "Ashwin Singh Takiar", url: "https://youtu.be/wwT18sl27h4", thumb: "https://img.youtube.com/vi/wwT18sl27h4/maxresdefault.jpg" },
+                { title: "Elvish Yadav Vlogs", url: "https://youtu.be/FeUhX-tOhzM", thumb: "https://img.youtube.com/vi/FeUhX-tOhzM/maxresdefault.jpg" },
+                { title: "Elvish Yadav", url: "https://youtu.be/-RZMtV6hhgY", thumb: "https://img.youtube.com/vi/-RZMtV6hhgY/maxresdefault.jpg" },
+                { title: "Mavi", url: "https://youtu.be/e2kSh90hGmk", thumb: "https://img.youtube.com/vi/e2kSh90hGmk/maxresdefault.jpg" },
+                { title: "Rehan Records", url: "https://youtube.com/shorts/1TlNMvjP3No", thumb: "https://img.youtube.com/vi/1TlNMvjP3No/maxresdefault.jpg" },
+                { title: "Corrupt Tuber", url: "https://youtu.be/WnZGoiYVwxE", thumb: "https://img.youtube.com/vi/WnZGoiYVwxE/maxresdefault.jpg" },
+                { title: "Lakshay & Archit", url: "https://youtu.be/q8x4ZoXBkwQ", thumb: "https://img.youtube.com/vi/q8x4ZoXBkwQ/maxresdefault.jpg" },
+                { title: "F10 Dalal", url: "https://www.instagram.com/reel/DIeI2dwTnxD", thumb: "https://placehold.co/600x400/18011F/D7E2EA?text=F10+Dalal+Reel" },
+                { title: "Kabir Sheikh", url: "https://www.instagram.com/reel/DLxdr7yTj3p", thumb: "https://placehold.co/600x400/18011F/D7E2EA?text=Kabir+Sheikh+Reel" },
+                { title: "Meta Ninza", url: "https://www.instagram.com/reel/DXtMPs3j3fS", thumb: "https://placehold.co/600x400/18011F/D7E2EA?text=Meta+Ninza+Reel" }
+            ];
+
+            const codingData = [
+                { title: "instagram_iq", language: "HTML", url: "https://github.com/Vinayakkhanna/instagram_iq", desc: "Instagram Analytics Dashboard" },
+                { title: "FuelTracker", language: "HTML", url: "https://github.com/Vinayakkhanna/FuelTracker", desc: "Fuel tracking system to monitor mileage" },
+                { title: "TubeIQ", language: "HTML", url: "https://github.com/Vinayakkhanna/TubeIQ", desc: "YouTube analytics platform" },
+                { title: "DeepFake", language: "HTML", url: "https://github.com/Vinayakkhanna/DeepFake", desc: "DeepFake related project" },
+                { title: "YouTube-Stats-Visualizer", language: "Python", url: "https://github.com/Vinayakkhanna/YouTube-Channel-Stats-Visualizer", desc: "Visualizer for YouTube Stats" },
+                { title: "Analyzing-Cricketer-Performance", language: "R", url: "https://github.com/Vinayakkhanna/Analyzing-and-Visualizing-Cricketer-Performance", desc: "Data analysis of cricketers" },
+                { title: "Vehicle-Service-Management", language: "MySQL", url: "https://github.com/Vinayakkhanna/Vehicle-Service-Management-System", desc: "Database project for vehicle service" },
+                { title: "Car-Rental-Management", language: "C++", url: "https://github.com/Vinayakkhanna/Car-Rental-Management-System", desc: "C++ based rental management" },
+                { title: "Car-Parking-System", language: "C", url: "https://github.com/Vinayakkhanna/Car-Parking-System", desc: "Smart car parking using Stacks" }
+            ];
+
+            const createVideoCardHTML = (data) => `
+                <a href="${data.url}" target="_blank" rel="noopener noreferrer" 
+                   class="group relative block w-[280px] sm:w-[380px] md:w-[420px] h-[180px] sm:h-[240px] md:h-[270px] shrink-0 rounded-[20px] sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ease-out hover:scale-[1.08] hover:z-50 hover:shadow-[0_15px_40px_rgba(215,226,234,0.15)] bg-white/5 border border-white/10 cursor-pointer">
+                    <img src="${data.thumb}" alt="${data.title}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/90 via-[#0C0C0C]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5 sm:p-6">
+                        <div class="flex items-center gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 w-full">
+                            <div class="w-10 h-10 shrink-0 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                                <svg class="w-4 h-4 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-white/70 text-[10px] sm:text-xs uppercase tracking-widest font-semibold mb-0.5">Watch Video</span>
+                                <h3 class="text-white font-bold text-sm sm:text-lg tracking-wide uppercase drop-shadow-md truncate max-w-[200px] sm:max-w-[240px]">${data.title}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `;
+
+            const createCodingCardHTML = (data) => `
+                <a href="${data.url}" target="_blank" rel="noopener noreferrer" 
+                   class="group relative block w-[280px] sm:w-[380px] md:w-[420px] h-[180px] sm:h-[240px] md:h-[270px] shrink-0 rounded-[20px] sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ease-out hover:scale-[1.08] hover:z-50 hover:shadow-[0_15px_40px_rgba(215,226,234,0.15)] bg-[#111] border border-white/10 cursor-pointer p-6 flex flex-col justify-between">
+                    
+                    <div class="flex justify-between items-start">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                            <svg class="w-7 h-7 text-[#D7E2EA]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <span class="text-[#D7E2EA]/50 text-xs font-medium uppercase tracking-wider border border-[#D7E2EA]/20 px-3 py-1 rounded-full">${data.language}</span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#D7E2EA] font-bold text-xl sm:text-2xl mb-2 group-hover:text-white transition-colors truncate">${data.title}</h3>
+                        <p class="text-[#D7E2EA]/60 text-sm font-light line-clamp-2">${data.desc}</p>
+                    </div>
+                    
+                    <div class="absolute inset-0 rounded-[20px] sm:rounded-2xl border-2 border-transparent group-hover:border-[#D7E2EA]/30 transition-colors duration-300 pointer-events-none"></div>
+                </a>
+            `;
+
+            function renderAnimatedText(profile) {
+                if (!textContainer) return;
+                textContainer.innerHTML = ''; 
+                const textToAnimate = profile === 'video' ? textVideo : textCoding;
+                const words = textToAnimate.split(" ");
+                
+                words.forEach(word => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'inline-block mr-[0.25em] last:mr-0';
+                    word.split('').forEach(char => {
+                        const charSpan = document.createElement('span');
+                        charSpan.innerText = char;
+                        charSpan.style.opacity = '0.2';
+                        charSpan.className = 'anim-char will-change-opacity'; 
+                        wordSpan.appendChild(charSpan);
+                    });
+                    textContainer.appendChild(wordSpan);
+                });
+                
+                charSpans = document.querySelectorAll('.anim-char');
+                totalChars = charSpans.length;
+            }
+
+            function renderMarquees(profile) {
+                if (!r1Container || !r2Container) return;
+                const activeData = profile === 'video' ? videoData : codingData;
+                
+                const row1 = [...activeData.slice(0, 5), ...activeData.slice(0, 5), ...activeData.slice(0, 5)];
+                const row2 = [...activeData.slice(5), ...activeData.slice(5), ...activeData.slice(5)];
+
+                if (profile === 'video') {
+                    r1Container.innerHTML = row1.map(createVideoCardHTML).join('');
+                    r2Container.innerHTML = row2.map(createVideoCardHTML).join('');
+                } else {
+                    r1Container.innerHTML = row1.map(createCodingCardHTML).join('');
+                    r2Container.innerHTML = row2.map(createCodingCardHTML).join('');
+                }
+            }
+
+            function performSwitch(profile, updateUrl) {
+                document.body.classList.add('is-switching');
+                
+                setTimeout(() => {
+                    document.documentElement.classList.remove('profile-coding', 'profile-video');
+                    document.documentElement.classList.add('profile-' + profile);
+                    document.title = profile === 'video' ? "Vinayak Khanna -- Video Editor" : "Vinayak Khanna -- Data Analyst";
+
+                    // Update Emails Dynamically
+                    const currentEmail = profile === 'video' ? videoEmail : codingEmail;
+                    document.querySelectorAll('.contact-btn').forEach(btn => {
+                        btn.onclick = () => window.location.href = `mailto:${currentEmail}`;
+                    });
+
+                    // Update Download Resume Links Dynamically
+                    const currentResume = profile === 'video' ? videoResume : codingResume;
+                    document.querySelectorAll('.resume-btn').forEach(btn => {
+                        btn.href = currentResume;
+                    });
+
+                    if (btnVideo && btnCoding) {
+                        if (profile === 'video') {
+                            btnVideo.classList.add('profile-toggle-active');
+                            btnVideo.classList.remove('profile-toggle-inactive');
+                            btnCoding.classList.add('profile-toggle-inactive');
+                            btnCoding.classList.remove('profile-toggle-active');
+                        } else {
+                            btnCoding.classList.add('profile-toggle-active');
+                            btnCoding.classList.remove('profile-toggle-inactive');
+                            btnVideo.classList.add('profile-toggle-inactive');
+                            btnVideo.classList.remove('profile-toggle-active');
+                        }
+                    }
+
+                    renderAnimatedText(profile);
+                    renderMarquees(profile);
+                    
+                    if (typeof handleScroll === 'function') handleScroll();
+
+                    setTimeout(() => {
+                        document.body.classList.remove('is-switching');
+                    }, 50);
+
+                }, 400);
+
+                if (updateUrl) {
+                    try {
+                        const currentUrl = new URL(window.location.href);
+                        currentUrl.searchParams.set('profile', profile);
+                        window.history.pushState({}, '', currentUrl.toString());
+                    } catch (e) {
+                        console.warn("URL update prevented by environment sandbox.");
+                    }
+                }
+            }
+
+            if (btnCoding) {
+                btnCoding.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    performSwitch('coding', true);
+                });
+            }
+            if (btnVideo) {
+                btnVideo.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    performSwitch('video', true);
+                });
+            }
+
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => entry.target.classList.add('is-visible'), 10);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0 });
+
+            document.querySelectorAll('.fade-in, .fade-in-x-left, .fade-in-x-right').forEach(el => fadeObserver.observe(el));
+
+            document.querySelectorAll('.magnet-container').forEach(el => {
+                const inner = el.querySelector('.magnet-inner');
+                window.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const distX = e.clientX - centerX;
+                    const distY = e.clientY - centerY;
+
+                    if (Math.abs(distX) < (rect.width / 2 + 150) && Math.abs(distY) < (rect.height / 2 + 150)) {
+                        inner.classList.add('active');
+                        inner.style.transform = `translate3d(${distX / 3}px, ${distY / 3}px, 0)`;
+                    } else {
+                        inner.classList.remove('active');
+                        inner.style.transform = `translate3d(0, 0, 0)`;
+                    }
+                });
+            });
+
+            let ticking = false;
+            const marqueeSection = document.getElementById('marquee-section');
+
+            const handleScroll = () => {
+                const scrollY = window.scrollY;
+                const viewportHeight = window.innerHeight;
+
+                if (marqueeSection && r1Container && r2Container) {
+                    const marqueeRect = marqueeSection.getBoundingClientRect();
+                    const sectionTop = scrollY + marqueeRect.top;
+                    const calcOffset = (scrollY - sectionTop + viewportHeight) * 0.3;
+                    r1Container.style.transform = `translate3d(${calcOffset - 200}px, 0, 0)`;
+                    r2Container.style.transform = `translate3d(${-(calcOffset - 200)}px, 0, 0)`;
+                }
+
+                if (textContainer && charSpans.length > 0) {
+                    const textRect = textContainer.getBoundingClientRect();
+                    const startPoint = viewportHeight * 0.8;
+                    const endPoint = viewportHeight * 0.2;
+                    let textProgress = (startPoint - textRect.top) / (startPoint - endPoint);
+                    textProgress = Math.max(0, Math.min(1, textProgress));
+
+                    charSpans.forEach((span, index) => {
+                        const charStart = index / totalChars;
+                        const charEnd = charStart + (1 / totalChars);
+                        let opacity = 0.2;
+                        
+                        if (textProgress >= charEnd) {
+                            opacity = 1;
+                        } else if (textProgress > charStart) {
+                            const charProgress = (textProgress - charStart) / (charEnd - charStart);
+                            opacity = 0.2 + (0.8 * charProgress);
+                        }
+                        if (span.style.opacity != opacity) span.style.opacity = opacity;
+                    });
+                }
+                ticking = false;
+            };
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(handleScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialProfile = urlParams.get('profile') === 'video' ? 'video' : 'coding';
+            
+            // Execute initial switch without URL update
+            performSwitch(initialProfile, false); 
+
+            // --- Playlist Modal Logic ---
+            const openModalBtn = document.getElementById('open-playlist-btn');
+            const closeModalBtn = document.getElementById('close-playlist-btn');
+            const playlistModal = document.getElementById('playlist-modal');
+            const playlistModalContent = document.getElementById('playlist-modal-content');
+            const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+
+            const openPlaylistModal = () => {
+                playlistModal.classList.remove('opacity-0', 'pointer-events-none');
+                playlistModalContent.classList.remove('scale-95');
+                playlistModalContent.classList.add('scale-100');
+                document.body.style.overflow = 'hidden'; // Prevents background scrolling when modal is open
+            };
+
+            const closePlaylistModal = () => {
+                playlistModal.classList.add('opacity-0', 'pointer-events-none');
+                playlistModalContent.classList.remove('scale-100');
+                playlistModalContent.classList.add('scale-95');
+                document.body.style.overflow = ''; 
+            };
+
+            if(openModalBtn) {
+                openModalBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openPlaylistModal();
+                });
+            }
+
+            if(closeModalBtn) {
+                closeModalBtn.addEventListener('click', closePlaylistModal);
+            }
+
+            modalBackdrops.forEach(backdrop => {
+                backdrop.addEventListener('click', closePlaylistModal);
+            });
+
+        });
+    </script>
+</body>
+</html>
