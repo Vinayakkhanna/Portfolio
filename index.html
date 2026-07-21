@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth profile-coding">
+<html lang="en" class="scroll-smooth profile-video">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinayak Khanna -- Portfolio</title>
+    <title>Vinayak Khanna -- Video Editor</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,11 +147,12 @@
                     
                     <!-- Centered Pill Toggle -->
                     <div class="flex bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-sm">
-                        <button id="toggle-coding" class="profile-toggle-active rounded-full px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300">
-                            Data & Coding
-                        </button>
-                        <button id="toggle-video" class="profile-toggle-inactive rounded-full px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300">
+                        <!-- Defaulted to Video Editing as active -->
+                        <button id="toggle-video" class="profile-toggle-active rounded-full px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300">
                             Video Editing
+                        </button>
+                        <button id="toggle-coding" class="profile-toggle-inactive rounded-full px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300">
+                            Data & Coding
                         </button>
                     </div>
 
@@ -200,7 +201,7 @@
                     </div>
                 </div>
 
-                <!-- Center Portrait (Magnet) fixed to use flexbox for perfect alignment -->
+                <!-- Center Portrait (Magnet) -->
                 <div class="absolute inset-0 z-10 flex justify-center items-center sm:items-end pointer-events-none">
                     <div class="fade-in pointer-events-auto w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px]" style="transition-delay: 600ms;">
                         <div class="magnet-container relative inline-block w-full">
@@ -514,6 +515,46 @@
                 </div>
             </div>
         </div>
+
+        <!-- Contact Modal -->
+        <div id="contact-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm contact-modal-backdrop"></div>
+            <div class="relative bg-[#0C0C0C] border border-[#D7E2EA]/20 rounded-[30px] w-full max-w-sm mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="contact-modal-content">
+                <!-- Header -->
+                <div class="flex items-center justify-between p-6 border-b border-[#D7E2EA]/10">
+                    <h3 class="text-[#D7E2EA] text-xl font-bold uppercase tracking-widest">Let's Connect</h3>
+                    <button id="close-contact-btn" class="text-[#D7E2EA]/60 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <!-- Content List -->
+                <div class="p-6 flex flex-col gap-4">
+                    
+                    <a href="tel:9760417032" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center border border-green-500/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">Phone / Call</span>
+                            <span class="text-[#D7E2EA] font-medium text-[15px] sm:text-base tracking-wide group-hover:text-white transition-colors">+91 97604 17032</span>
+                        </div>
+                    </a>
+
+                    <!-- Email Button opens directly into Gmail UI -->
+                    <a href="#" id="contact-email-btn" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center border border-red-500/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="flex flex-col overflow-hidden w-full">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">Email via Gmail</span>
+                            <span id="contact-email-text" class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">email@example.com</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script>
@@ -641,19 +682,22 @@
                 }
             }
 
-            function performSwitch(profile, updateUrl) {
-                document.body.classList.add('is-switching');
-                
-                setTimeout(() => {
+            function performSwitch(profile, updateUrl, isInitial = false) {
+                const executeSwitch = () => {
                     document.documentElement.classList.remove('profile-coding', 'profile-video');
                     document.documentElement.classList.add('profile-' + profile);
                     document.title = profile === 'video' ? "Vinayak Khanna -- Video Editor" : "Vinayak Khanna -- Data Analyst";
 
-                    // Update Emails Dynamically
+                    // Update Email Modal Links Dynamically
                     const currentEmail = profile === 'video' ? videoEmail : codingEmail;
-                    document.querySelectorAll('.contact-btn').forEach(btn => {
-                        btn.onclick = () => window.location.href = `mailto:${currentEmail}`;
-                    });
+                    const contactEmailBtn = document.getElementById('contact-email-btn');
+                    const contactEmailText = document.getElementById('contact-email-text');
+                    
+                    if (contactEmailText) contactEmailText.innerText = currentEmail;
+                    if (contactEmailBtn) {
+                        // This specific Google Mail URL forces Gmail exclusively on both mobile & desktop
+                        contactEmailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${currentEmail}`;
+                    }
 
                     // Update Download Resume Links Dynamically
                     const currentResume = profile === 'video' ? videoResume : codingResume;
@@ -680,11 +724,19 @@
                     
                     if (typeof handleScroll === 'function') handleScroll();
 
-                    setTimeout(() => {
-                        document.body.classList.remove('is-switching');
-                    }, 50);
+                    if (!isInitial) {
+                        setTimeout(() => {
+                            document.body.classList.remove('is-switching');
+                        }, 50);
+                    }
+                };
 
-                }, 400);
+                if (isInitial) {
+                    executeSwitch();
+                } else {
+                    document.body.classList.add('is-switching');
+                    setTimeout(executeSwitch, 400);
+                }
 
                 if (updateUrl) {
                     try {
@@ -787,10 +839,11 @@
             }, { passive: true });
 
             const urlParams = new URLSearchParams(window.location.search);
-            const initialProfile = urlParams.get('profile') === 'video' ? 'video' : 'coding';
+            // Defaulting explicitly to 'video' if not 'coding'
+            const initialProfile = urlParams.get('profile') === 'coding' ? 'coding' : 'video';
             
             // Execute initial switch without URL update
-            performSwitch(initialProfile, false); 
+            performSwitch(initialProfile, false, true); 
 
             // --- Playlist Modal Logic ---
             const openModalBtn = document.getElementById('open-playlist-btn');
@@ -803,7 +856,7 @@
                 playlistModal.classList.remove('opacity-0', 'pointer-events-none');
                 playlistModalContent.classList.remove('scale-95');
                 playlistModalContent.classList.add('scale-100');
-                document.body.style.overflow = 'hidden'; // Prevents background scrolling when modal is open
+                document.body.style.overflow = 'hidden'; 
             };
 
             const closePlaylistModal = () => {
@@ -826,6 +879,43 @@
 
             modalBackdrops.forEach(backdrop => {
                 backdrop.addEventListener('click', closePlaylistModal);
+            });
+
+            // --- Contact Modal Logic ---
+            const contactModal = document.getElementById('contact-modal');
+            const contactModalContent = document.getElementById('contact-modal-content');
+            const closeContactBtn = document.getElementById('close-contact-btn');
+            const contactBackdrops = document.querySelectorAll('.contact-modal-backdrop');
+
+            const openContactModal = () => {
+                contactModal.classList.remove('opacity-0', 'pointer-events-none');
+                contactModalContent.classList.remove('scale-95');
+                contactModalContent.classList.add('scale-100');
+                document.body.style.overflow = 'hidden'; 
+            };
+
+            const closeContactModal = () => {
+                contactModal.classList.add('opacity-0', 'pointer-events-none');
+                contactModalContent.classList.remove('scale-100');
+                contactModalContent.classList.add('scale-95');
+                document.body.style.overflow = ''; 
+            };
+
+            // Bind all Contact buttons on the page to open the new modal
+            document.querySelectorAll('.contact-btn').forEach(btn => {
+                // Override default behaviour and any previous inline click events
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openContactModal();
+                });
+            });
+
+            if(closeContactBtn) {
+                closeContactBtn.addEventListener('click', closeContactModal);
+            }
+
+            contactBackdrops.forEach(backdrop => {
+                backdrop.addEventListener('click', closeContactModal);
             });
 
         });
