@@ -519,7 +519,7 @@
         <!-- Contact Modal -->
         <div id="contact-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
             <div class="absolute inset-0 bg-black/80 backdrop-blur-sm contact-modal-backdrop"></div>
-            <div class="relative bg-[#0C0C0C] border border-[#D7E2EA]/20 rounded-[30px] w-full max-w-sm mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="contact-modal-content">
+            <div class="relative bg-[#0C0C0C] border border-[#D7E2EA]/20 rounded-[30px] w-full max-w-md mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="contact-modal-content">
                 <!-- Header -->
                 <div class="flex items-center justify-between p-6 border-b border-[#D7E2EA]/10">
                     <h3 class="text-[#D7E2EA] text-xl font-bold uppercase tracking-widest">Let's Connect</h3>
@@ -528,7 +528,7 @@
                     </button>
                 </div>
                 <!-- Content List -->
-                <div class="p-6 flex flex-col gap-4">
+                <div class="p-6 overflow-y-auto max-h-[70vh] custom-scrollbar flex flex-col gap-3">
                     
                     <a href="tel:9760417032" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
                         <div class="w-12 h-12 shrink-0 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center border border-green-500/30">
@@ -548,6 +548,61 @@
                         <div class="flex flex-col overflow-hidden w-full">
                             <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">Email via Gmail</span>
                             <span id="contact-email-text" class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">email@example.com</span>
+                        </div>
+                    </a>
+
+                    <!-- Google Drive -->
+                    <a href="https://drive.google.com/drive/folders/1GLDVXqEFfxNSB9Qr2NylDHVazxwakKAl?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        </div>
+                        <div class="flex flex-col overflow-hidden w-full">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">Google Drive</span>
+                            <span class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">Portfolio Folder & Assets</span>
+                        </div>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/vinayakkhanna/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-sky-600/20 text-sky-400 flex items-center justify-center border border-sky-600/30">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </div>
+                        <div class="flex flex-col overflow-hidden w-full">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">LinkedIn</span>
+                            <span class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">vinayakkhanna</span>
+                        </div>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/Vinayakkhanna" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center border border-purple-500/30">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="flex flex-col overflow-hidden w-full">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">GitHub</span>
+                            <span class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">Vinayakkhanna</span>
+                        </div>
+                    </a>
+
+                    <!-- Framefolio -->
+                    <a href="https://framefolio.in/vinayakk" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center border border-orange-500/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="flex flex-col overflow-hidden w-full">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">Framefolio</span>
+                            <span class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">framefolio.in/vinayakk</span>
+                        </div>
+                    </a>
+
+                    <!-- Behance -->
+                    <a href="https://www.behance.net/vinayakkhanna4" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center border border-indigo-500/30">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-4.726 3-3.232 0-5.4-2.312-5.4-5.75 0-3.328 2.124-5.75 5.5-5.75 2.76 0 4.3 1.54 4.8 2.8l-1.8 1.1c-.34-.84-1.2-1.7-3-1.7-1.9 0-3.2 1.25-3.2 3.5 0 2.25 1.3 3.5 3.2 3.5 1.6 0 2.5-.7 2.9-1.6l1.726 1.05zm-11.726-8.25h-5.5v1.75h5.5v-1.75zm0 3.25h-5.5v1.75h5.5v-1.75zm-5.5 3.25h5.5v1.75h-5.5v-1.75z"/></svg>
+                        </div>
+                        <div class="flex flex-col overflow-hidden w-full">
+                            <span class="text-[#D7E2EA]/60 text-xs uppercase tracking-widest mb-0.5">Behance</span>
+                            <span class="text-[#D7E2EA] font-medium text-[14px] sm:text-[15px] tracking-wide group-hover:text-white transition-colors truncate">vinayakkhanna4</span>
                         </div>
                     </a>
 
