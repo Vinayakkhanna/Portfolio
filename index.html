@@ -190,7 +190,7 @@
                     
                     <div class="fade-in flex items-center justify-center gap-3 sm:gap-4" style="transform: translateY(20px); transition-delay: 500ms;">
                         <!-- Contact Buttons -->
-                        <button class="contact-btn rounded-full px-6 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 whitespace-nowrap">
+                        <button class="contact-btn open-contact-btn rounded-full px-6 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 whitespace-nowrap">
                             Contact Me
                         </button>
                         <!-- Download Resume Button -->
@@ -245,7 +245,7 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full">
-                        <button class="contact-btn rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
+                        <button class="contact-btn open-contact-btn rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
                             Contact Me
                         </button>
                         <a href="#" target="_blank" class="resume-btn flex items-center justify-center gap-2 rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base text-[#D7E2EA] font-medium uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 border border-[#D7E2EA]/30 hover:bg-[#D7E2EA]/10 w-full sm:w-auto">
@@ -901,8 +901,8 @@
                 document.body.style.overflow = ''; 
             };
 
-            // Bind all Contact buttons on the page to open the new modal
-            document.querySelectorAll('.contact-btn').forEach(btn => {
+            // Bind all Contact buttons on the page to open the new modal using open-contact-btn class
+            document.querySelectorAll('.open-contact-btn').forEach(btn => {
                 // Override default behaviour and any previous inline click events
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
